@@ -7,30 +7,35 @@ var cors  = require('cors');
 var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
-import { issues }  from './data/issues.js';
+import { MetaverseDataSet } from './data/MetaverseDataSet.js';
  
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type Query {
-    getIssues: [ Issue ],
- }
+    getMetaverses: [ Metaverse ],
+  }
 
-  type Issue {
-    title: String,
-    number: String
+  type Metaverse {
+    name: String,
+    website: String,
+    characteristics: [ Characteristic ]
+  }
+
+  type Characteristic {
+    style: String
   }
 
 `);
 
-
-const Issues = issues.issues;
+const Metaverses = MetaverseDataSet.metaverseDataSet;
  
-console.log(Issues);
-
+console.log(MetaverseDataSet);
 
 // The root provides a resolver function for each API endpoint
 var root = {
-  getIssues: () => Issues,
+  getMetaverses: () => {
+    return Metaverses;
+  },
 };
  
 var app = express();
