@@ -13,11 +13,14 @@ import { MetaverseDataSet } from './data/MetaverseDataSet.js';
 var schema = buildSchema(`
   type Query {
     getMetaverses: [ Metaverse ],
+    getMetaverse: Metaverse
   }
 
   type Metaverse {
+    id: ID,
     name: String,
     website: String,
+    description: String
     characteristics: [ Characteristic ]
   }
 
@@ -36,6 +39,9 @@ var root = {
   getMetaverses: () => {
     return Metaverses;
   },
+  getMetaverse: (id) => {
+    return Metaverses[0];
+  }
 };
  
 var app = express();

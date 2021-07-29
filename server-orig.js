@@ -8,7 +8,7 @@ var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 import { testdata }  from './testdata.js';
-import { issues }  from './issues.js';
+import { issues }  from './data/issues.js';
 import { MetaverseDataSet } from './data/MetaverseDataSet.js';
  
 // Construct a schema, using GraphQL schema language
