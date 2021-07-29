@@ -14,14 +14,16 @@ var schema = buildSchema(`
   type Query {
     getMetaverses: [ Metaverse ],
     getMetaverse: Metaverse,
-    getMetaverseByName( name: String ): Metaverse
+    getMetaverseByName( name: String ): Metaverse,
+    getMetaverseListByGenre( genre: String ): [ Metaverse ]
   }
 
   type Metaverse {
     id: ID,
     name: String,
     website: String,
-    description: String
+    description: String,
+    genre: String,
     characteristics: [ Characteristic ]
   }
 
@@ -44,14 +46,23 @@ var root = {
     return Metaverses[0];
   },
   getMetaverseByName: ({name}) => {
-    //if (metaverseDataSet[name]) return metaverseDataSet['decentraland'];
-    console.log(name);
+    console.log({name});
     for (let i = 0; i < Metaverses.length; i++) {
-      if (Metaverses[i].name == name) {
+      if (Metaverses[i].name === name) {
           return Metaverses[i];
       }
     }
     return null;
+  },
+  getMetaverseListByGenre: ({genre}) => {
+    let MetaverseListByGenre = [];
+    console.log({genre});
+    for (let i = 0; i < Metaverses.length; i++) {
+      if (Metaverses[i].genre === genre) {
+        MetaverseListByGenre.push(Metaverses[i]);
+      }
+    }
+    return MetaverseListByGenre;
   }
 };
  
