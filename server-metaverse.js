@@ -13,7 +13,8 @@ import { MetaverseDataSet } from './data/MetaverseDataSet.js';
 var schema = buildSchema(`
   type Query {
     getMetaverses: [ Metaverse ],
-    getMetaverse: Metaverse
+    getMetaverse: Metaverse,
+    getMetaverseByName( name: String ): Metaverse
   }
 
   type Metaverse {
@@ -41,6 +42,16 @@ var root = {
   },
   getMetaverse: (id) => {
     return Metaverses[0];
+  },
+  getMetaverseByName: ({name}) => {
+    //if (metaverseDataSet[name]) return metaverseDataSet['decentraland'];
+    console.log(name);
+    for (let i = 0; i < Metaverses.length; i++) {
+      if (Metaverses[i].name == name) {
+          return Metaverses[i];
+      }
+    }
+    return null;
   }
 };
  
